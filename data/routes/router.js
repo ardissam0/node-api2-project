@@ -4,6 +4,7 @@ const router = express.Router();
 
 const db = require('../db');
 
+//get posts
 router
 .get("/", (req, res) => {
     db.find(req.query)
@@ -18,7 +19,7 @@ router
       });
   });
 
-
+//get posts by id
   router
   .get("/:id", (req, res) => {
     db.findById(req.params.id)
@@ -39,7 +40,7 @@ router
       });
     });
 
-
+//get comments
     router
     .get("/:id/comments", (req, res) => {
         db.findPostComments(req.params.id)
@@ -60,7 +61,7 @@ router
           });
       });
 
-
+//add posts
       router
       .post("/", (req, res) => {
         req.body.title && req.body.contents
@@ -80,6 +81,7 @@ router
       });
 
 
+    //add comments
       router
       .post("/:id/comments", (req, res) => {
         db.findById(req.params.id)
@@ -109,7 +111,7 @@ router
           });
       });
 
-
+//delete post by id
       router
       .delete("/:id", (req, res) => {
         db.findById(req.params.id)
@@ -135,7 +137,7 @@ router
           });
       });
 
-
+//edit post by id
       router
       .put("/:id", (req, res) => {
         !req.params.id
